@@ -13,3 +13,17 @@ class SavingsAccount:
             print("Withdrawal successful! Current balance: {}".format(balance))    
             return balance
                 
+class ChequingAccount:
+    def __init__(self, overdraft):
+        self.overdraftAllowed = overdraft                
+
+    def withdraw(self, balance, amount):
+        if amount > balance + self.overdraftAllowed:
+            print("Withdraw amount is too much!")
+            return balance
+
+        else:
+            balance -= amount
+            print("Withdrawal successful! Current balance: {}".format(balance))
+            return balance
+
