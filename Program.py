@@ -26,9 +26,9 @@ class Program:
                     except ValueError:
                         print("Invalid Input!")
                         continue
-                    for account in self.b.accounts:  #Searches the accounts for the account that the user wants to work with.
-                        if account.getAccountNumber() == acc_num:
-                            self.showAccountMenu(account)
+                    account = self.b.searchAccount(acc_num)
+                    if account != -1:
+                        self.showAccountMenu(account)
 
             elif choice == "3" or choice == "Exit":
                 break
@@ -41,7 +41,7 @@ class Program:
         while True:
             print("1. Check Balance\n2. Deposit\n3. Withdraw\n4. Exit Account")
             choice = input("Please enter an option: ").title() 
-                       
+
             if choice == "1" or choice == "Check Balance":
                 print(account.get_CurrentBalance())
 
