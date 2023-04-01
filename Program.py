@@ -46,10 +46,20 @@ class Program:
                 print(account.get_CurrentBalance())
 
             elif choice == "2" or choice == "Deposit":
-                account.deposit()
+                try:
+                    amount = int(input("Please enter the deposit amount: "))
+                except ValueError:
+                    print("Invalid input! Try again.")
+                    continue
+                account.deposit(amount)
 
             elif choice == "3" or choice == "Withdraw":
-                account.withdraw()
+                try:
+                    amount = int(input("Please enter the withdrawal amount: "))
+                except ValueError:
+                    print("Invalid input! Try again.")
+                    continue
+                account.withdraw(amount)
 
             elif choice == "4" or "Exit Account":
                 self.showMainMenu()
