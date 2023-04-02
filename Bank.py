@@ -30,14 +30,14 @@ class ChequingAccount:
             return balance
 
 class Account:
-    def __init__(self, num, name, interest, balance, type):
+    def __init__(self, num, name, interest, balance, type_):
         self.accountNumber = num
-        self.accountHolderName = name
+        self.accountHolderName = name.capitalize()
         self.rateOfInterest = interest
         self.currentBalance = balance
-        if type == "Savings":
-            self.acc = SavingsAccount(5000)
-        elif type == "Chequing":
+        if type_ == "Savings":
+            self.acc = SavingsAccount(3000)
+        elif type_ == "Chequing":
             self.acc = ChequingAccount(5000)    
 
     def get_accountNumber(self):
@@ -55,4 +55,23 @@ class Account:
 
     def withdraw(self, amount):
         self.currentBalance = self.acc.withdraw(self.currentBalance, amount)    
-        
+
+class Bank:
+    """Implements the business logic required for the banking."""
+    bankName = "TD Bank"        
+    accounts = [Account(123, "matin", 2, 8000, "Savings"), Account(456, "joe", 3, 9000, "Chequing"),
+                 Account(789, "mark", 1.5, 8500, "Savings"), Account(141, "anna", 2.5, 9500, "Chequing"),
+                   Account(351, "sarah", 4, 7500, "Savings")]
+    def openAccount(self, num, name, interest, balance, type_):
+        for account in self.accounts:
+            if account.get_accountNumber() == num:
+                print("This account number already exists!")
+                return
+        self.accounts.append(Account(num, name, interest, balance, type_)) 
+        print("Account created.")
+
+    def searchAccount(self, num):
+        for account in self.accounts:
+            if account.get_accountNumber() == num:
+                return account
+        return -1    

@@ -17,7 +17,19 @@ class Program:
             choice = input("Please enter an option: ").title()
 
             if choice == "1" or choice == "Open Account":
-                pass
+                try:
+                    num = int(input("Please enter the account number: "))
+                    interest = float(input("Please enter the rate of interest: "))
+                    balance = float(input("Please enter the current balance: "))
+                except ValueError:
+                    print("Invalid input! Try again.")
+                    continue    
+                name = input("Please enter the account holder name: ")
+                type_ = input("Please enter the type of account you want to open (Savings for Savings account or Chequing for Chequing account): ").capitalize()
+                if type_ != "Savings" and type_ != "Chequing":
+                    print("Invalid input! Try again.")
+                    continue
+                self.b.openAccount(num, name, interest, balance, type_)
 
             elif choice == "2" or choice == "Select Account":
                 while True:
@@ -29,6 +41,8 @@ class Program:
                     account = self.b.searchAccount(acc_num)
                     if account != -1:
                         self.showAccountMenu(account)
+                    else:
+                        print("Account does not exist.")    
 
             elif choice == "3" or choice == "Exit":
                 break
@@ -43,7 +57,7 @@ class Program:
             choice = input("Please enter an option: ").title() 
 
             if choice == "1" or choice == "Check Balance":
-                print(account.get_CurrentBalance())
+                print(account.get_currentBalance())
 
             elif choice == "2" or choice == "Deposit":
                 try:
