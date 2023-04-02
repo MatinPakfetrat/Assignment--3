@@ -1,7 +1,7 @@
 """Contains the class Bank."""
 
 class SavingsAccount:
-    """Extends the class Account to represent the savings accounts."""
+    """Represents the savings accounts."""
     def __init__(self, minbal):
         self.minimumBalance = minbal
 
@@ -15,7 +15,7 @@ class SavingsAccount:
             return balance
                 
 class ChequingAccount:
-    """Extends the class Account to represent the chequing accounts."""
+    """Represents the chequing accounts."""
     def __init__(self, overdraft):
         self.overdraftAllowed = overdraft                
 
@@ -30,23 +30,24 @@ class ChequingAccount:
             return balance
 
 class Account:
-    def __init__(self, num, name, interest, balance, type_):
+    """Represents a bank account."""
+    def __init__(self, num, name, interest, balance, type_, minbal, overdraft):
         self.accountNumber = num
         self.accountHolderName = name.capitalize()
         self.rateOfInterest = interest
         self.currentBalance = balance
         if type_ == "Savings":
-            self.acc = SavingsAccount(3000)
+            self.acc = SavingsAccount(minbal)
         elif type_ == "Chequing":
-            self.acc = ChequingAccount(5000)    
+            self.acc = ChequingAccount(overdraft)    
 
-    def get_accountNumber(self):
+    def getAccountNumber(self):
         return self.accountNumber
-    def get_accountHoldername(self):
+    def getAccountHoldername(self):
         return self.accountHolderName
-    def get_rateOfInterest(self):
+    def getRateOfInterest(self):
         return self.rateOfInterest
-    def get_currentBalance(self):
+    def getCurrentBalance(self):
         return self.currentBalance
     
     def deposit(self, amount):
@@ -59,12 +60,12 @@ class Account:
 class Bank:
     """Implements the business logic required for the banking."""
     bankName = "TD Bank"        
-    accounts = [Account(123, "matin", 2, 8000, "Savings"), Account(456, "joe", 3, 9000, "Chequing"),
-                 Account(789, "mark", 1.5, 8500, "Savings"), Account(141, "anna", 2.5, 9500, "Chequing"),
-                   Account(351, "sarah", 4, 7500, "Savings")]
+    accounts = [Account(123, "matin", 2, 8000, "Savings", 3000, 5000), Account(456, "joe", 3, 9000, "Chequing", 4000, 4000),
+                 Account(789, "mark", 1.5, 8500, "Savings", 2000, 4500), Account(141, "anna", 2.5, 9500, "Chequing", 3500, 4000),
+                   Account(351, "sarah", 4, 7500, "Savings", 2500, 5000)]
     def openAccount(self, num, name, interest, balance, type_):
         for account in self.accounts:
-            if account.get_accountNumber() == num:
+            if account.getAccountNumber() == num:
                 print("This account number already exists!")
                 return
         self.accounts.append(Account(num, name, interest, balance, type_)) 
@@ -72,6 +73,7 @@ class Bank:
 
     def searchAccount(self, num):
         for account in self.accounts:
-            if account.get_accountNumber() == num:
+            if account.getAccountNumber() == num:
                 return account
         return -1    
+    

@@ -16,7 +16,7 @@ class Program:
             print("1. Open Account\n2. Select Account\n3. Exit")
             choice = input("Please enter an option: ").title()
 
-            if choice == "1" or choice == "Open Account":
+            if choice == "1" or choice == "Open Account":  #Opens an account.
                 try:
                     num = int(input("Please enter the account number: "))
                     interest = float(input("Please enter the rate of interest: "))
@@ -31,7 +31,7 @@ class Program:
                     continue
                 self.b.openAccount(num, name, interest, balance, type_)
 
-            elif choice == "2" or choice == "Select Account":
+            elif choice == "2" or choice == "Select Account":  #Searches for an account based on the account number, if it exists allows the user to work with it.
                 while True:
                     try:
                         acc_num = int(input("Please enter the account number of the account that you want to work with: "))  #Gets the account number of the user's account.
@@ -56,20 +56,26 @@ class Program:
             print("1. Check Balance\n2. Deposit\n3. Withdraw\n4. Exit Account")
             choice = input("Please enter an option: ").title() 
 
-            if choice == "1" or choice == "Check Balance":
-                print(account.get_currentBalance())
+            if choice == "1" or choice == "Check Balance":  #Prints the current balance of the account.
+                print(account.getCurrentBalance())
 
-            elif choice == "2" or choice == "Deposit":
+            elif choice == "2" or choice == "Deposit":  #Deposits money to the account.
                 try:
                     amount = int(input("Please enter the deposit amount: "))
+                    if amount < 0:
+                        print("Invalid input! Try again.")
+                        continue
                 except ValueError:
                     print("Invalid input! Try again.")
                     continue
                 account.deposit(amount)
 
-            elif choice == "3" or choice == "Withdraw":
+            elif choice == "3" or choice == "Withdraw":  #Withdraws money from the account.
                 try:
                     amount = int(input("Please enter the withdrawal amount: "))
+                    if amount < 0:
+                        print("Invalid input! Try again.")
+                        continue
                 except ValueError:
                     print("Invalid input! Try again.")
                     continue
@@ -81,3 +87,6 @@ class Program:
 
             else:
                 print("Invalid input! Please enter one of the options!")
+
+prog = Program()
+prog.run()  #Runs the program.
